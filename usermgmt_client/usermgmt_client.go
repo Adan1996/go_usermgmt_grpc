@@ -33,9 +33,17 @@ func main() {
 		if err != nil {
 			log.Fatalf("could not create user: %v", err)
 		}
-		log.Printf(`Users details:
+		log.Printf(`
+		Users details:
 		Name: %s
 		Age: %d
 		ID: %d`, r.GetName(), r.GetAge(), r.GetId())
 	}
+	params := &pb.GetUsersParams{}
+	r, err := client.GetUsers(ctx, params)
+	if err != nil {
+		log.Fatalf("Could not retrive users: %v", err)
+	}
+	log.Print("\nUSER LISTS\n")
+	log.Printf("r.GetUsers(): %v", r.GetUsers())
 }
